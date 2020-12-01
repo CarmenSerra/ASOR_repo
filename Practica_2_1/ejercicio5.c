@@ -8,8 +8,8 @@
 int main(){
 
 struct utsname buffer; 
-int e;
-	e = uname(&buffer);
+
+ uname(&buffer);
 
 printf("sistema : %s\n", buffer.sysname);
 printf("nombre del host : %s\n", buffer.nodename);
