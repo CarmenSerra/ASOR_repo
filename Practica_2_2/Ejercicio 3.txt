@@ -1,0 +1,7 @@
+rw-r--r-x
+
+-De forma escrita: 
+chmod u+r+w-x, g+r-w-x, o+r-w+x FICHERO
+ 
+-De forma numerica: 
+chmod 645 FICHERO
