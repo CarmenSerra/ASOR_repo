@@ -1,0 +1,10 @@
+Ejecutados los comandos
+$man chrt
+$man nice
+$man renice.
+Después compruebo cuales son los procesos actuales con $ps
+selecciono en mi caso el 24716 para poder cambiar lo del ejercicio.
+En primer lugar compruebo la política que ya tiene con: $chrt  -v -p 24716
+y tiene la SHCED_OTHER y una prioridad de 0.
+
+Para cambiarla: $chrt -f -p 12 24716
