@@ -12,16 +12,18 @@
 
 int main(int argc, char **argv) {
 
-int plani_i;
-pid_t pid = getpid(); //Obtengo el pid del proceso para obtener la planificacion
-printf("Proceso %d\n", pid);
 
-plani_i = sched_getscheduler(pid);
-char plani[10];
+//pid_t pid = getpid(); Obtengo el pid del proceso para obtener la planificacion
+//printf("Proceso %d\n", pid);
 
-sprintf(plani,"%d",plani_i);
+int pid = atoi(argv[1]);
 
-printf("Politica planificacion: %c\n", plani);
+
+int plani_i = sched_getscheduler(pid);
+    if ( plani_i == SCHED_OTHER ) printf("SCHED_OTHER\n");
+    else if ( plani_i == SCHED_FIFO ) printf("SCHED_FIFO\n");
+    else if ( plani_i == SCHED_RR ) printf("SCHED_RR\n");
+    else printf("UNKNOWN\n");
 
 int prio_proc = getpriority(PRIO_PROCESS, pid);
 
