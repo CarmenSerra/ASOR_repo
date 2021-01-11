@@ -1,0 +1,2 @@
+La prioridad del proceso es 0, aún habiendola modificado a 12 mediante el comando chrt.
+Y sí se heredan los atributos de planificación.
