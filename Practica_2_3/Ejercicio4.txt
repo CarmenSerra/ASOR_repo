@@ -1,0 +1,4 @@
+Mostrar todos los procesos del usuario actual en formato extendido
+ps -U root -u root u
+Mostrar los procesos del sistema, incluyendo el identificador del proceso, el identificador del grupo de procesos, el identificador de sesión, el estado y la línea de comandos.
+Observar el identificador de proceso, grupo de procesos y sesión de los procesos. ¿Qué identificadores comparten la shell y los programas que se ejecutan en ella? ¿Cuál es el identificador de grupo de procesos cuando se crea un nuevo proceso?
