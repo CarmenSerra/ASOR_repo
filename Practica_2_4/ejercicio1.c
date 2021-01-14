@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
     printf("Introduce el comando.\n");
     return -1;
   }
-
+int status;
 	int fd[2];
 //Creo primero la tubería porque si no debajo del fork no compartirían los descriptores y tendrían tuberías diferentes, y queremos que compartan la misma
 
@@ -36,18 +36,6 @@ int main(int argc, char **argv) {
 		return -1;
 	    case 0:
 	 	//HIJO
-		dup2(fd[1],1); //descriptor de fichero de entrada y entrada estandar
-		close(fd[1]);
-		close(fd[0]);
-		//Ejecutamos mediante lista porque sabemos que siempre van a entrar esos X argumentos
-		execlp(argv[1], argv[1], argv[2], NULL);
-	
-	     break;
-
-	     default:	
-		//PADRE
-		//No necesitamos el wait porque ya se hace la sincronización mediante la escritura y lectura
-
 		dup2(fd[0],0);
 		
 
@@ -55,6 +43,16 @@ int main(int argc, char **argv) {
 		close(fd[1]);
 
 		execlp(argv[3], argv[3], argv[4], NULL);
+	
+	     break;
+
+	     default:	
+		//PADRE
+		dup2(fd[1],1); //descriptor de fichero de entrada y entrada estandar
+		close(fd[1]);
+		close(fd[0]);
+		//Ejecutamos mediante lista porque sabemos que siempre van a entrar esos X argumentos
+		execlp(argv[1], argv[1], argv[2], NULL);
 	
 	     break;
 
