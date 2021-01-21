@@ -26,9 +26,8 @@ filtro.ai_socktype = SOCK_STREAM;
 filtro.ai_family = AF_UNSPEC;
 filtro.ai_flags =  AI_PASSIVE;
 
-	
        int  rc = getaddrinfo(argv[1], argv[2], &filtro, &resultado);
-	//int  rc = getaddrinfo("fd00::a:0:0:0:100", "2222", &filtro, &resultado);
+
                  
 	if(rc != 0){
 	printf("Error en getaddrinfo : %d\n", gai_strerror(rc));
@@ -38,7 +37,7 @@ filtro.ai_flags =  AI_PASSIVE;
 	//socket
 	int sd_tcp = socket(resultado->ai_family, resultado->ai_socktype,0);
 	//bind
-	int bd = bind(sd_tcp,&resultado->ai_addr, resultado->ai_addrlen);
+	int bd = bind(sd_tcp, (struct sockaddr *)&resultado->ai_addr, resultado->ai_addrlen);
 
 	if(bd!= 0){
 	printf("Error en bind \n");
@@ -47,7 +46,7 @@ filtro.ai_flags =  AI_PASSIVE;
 
 	int l = listen(sd_tcp,10);
 	if(l!= 0){
-	printf("Error en listen \n");
+	printf("Error en bind \n");
 	return -1;
 	}
 
@@ -80,13 +79,13 @@ int ac =  accept(sd_tcp,(struct sockaddr*)&cliente_addr , cliente_addrlen);
 					return -1;
 				}
 			buffer[by] = '\0';
-			esc = send(sd_tcp,buffer,(by+1)*sizeof(char),0);	
+			esc = send(ac,buffer,(by+1)*sizeof(char),0);	
 				if (esc == -1) {
 					perror("Error enviando al server echo");
 					close(sd_tcp);
 				return -1;
 				}
-			by = recv(sd_tcp,buffer, 256*sizeof(char),0);
+			by = recv(ac,buffer, 256*sizeof(char),0);
 				if (by == -1) {
 					perror("Error leyendo de server");
 					close(sd_tcp);
