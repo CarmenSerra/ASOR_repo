@@ -81,7 +81,7 @@ char serv[NI_MAXSERV];
 
 	
 		do{
-			bytes = recv(sd_tcp, buffer, 256*sizeof(char), 0);
+			bytes = recv(ac, buffer, 256*sizeof(char), 0);
 			
 
 			if(bytes == -1){
@@ -94,7 +94,7 @@ char serv[NI_MAXSERV];
 			}
 			else{
 			buffer[bytes]='\0';
-			ssize_t esc = send(sd_tcp, buffer, bytes+1, 0);
+			ssize_t esc = send(ac, buffer, bytes+1, 0);
 				if(esc == -1){
 					printf("Error al escribir los datos\n");
 					return -1;
